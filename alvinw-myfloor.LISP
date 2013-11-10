@@ -7,7 +7,7 @@
 ;;global constant containing name
 (defparameter +ID+ "Alvin Wang, Brent Yoshida, and Taylor Kennedy")
 
-(defparameter *door-solved* NIL)
+(defparameter *third-floor-solved* NIL)
 
 ;;variables for description of in-game locations
 (defparameter *nodes* '((third-floor (you are on the third floor. you see a locked emergency exit door.))
@@ -21,7 +21,7 @@
 ;;variables to show connections between locations
 (defparameter *edges* '((third-floor (break-room west door))
                         (break-room  (third-floor east door))
-                        (street-level (third-floor north ladder))))
+                        (street-level (third-floor up ladder))))
 
 ;;desribes connecting edges
 (defun describe-path (edge)
@@ -72,16 +72,24 @@
 (defun unlock ()
   (cond
     ;unlock only on third-floor
-    ((AND (eq *location* 'third-floor) (eq *door-solved* NIL))
+    ((AND (eq *location* 'third-floor) (eq *third-floor-solved* NIL))
      (door-puzzle))
-    ((AND (eq *location* 'third-floor) (eq *door-solved* t))
+    ((AND (eq *location* 'third-floor) (eq *third-floor-solved* t))
       '(emergency door already unlocked.))
      (t
        '(you cannot do that.))))
 
 ;;door-puzzle
 (defun door-puzzle ()
-  (princ "door puzzle!"))
+  (format t "Unlocking door...")
+  (fresh-line)
+  (sleep 3)
+  (format t "Door unlocked!")
+  (fresh-line)
+  (push '(street-level north door) (cdr (assoc *location* *edges*)))
+  (setf *third-floor-solved* t)
+  (rplaca (cdr (assoc 'third-floor *nodes*)) '(you are on the third-floor. the emergency door has been unlocked.))
+  (look))
 
 ;  wizards_game part 2
 
