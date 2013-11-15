@@ -8,9 +8,14 @@
 (defparameter +ID+ "Alvin Wang, Brent Yoshida, and Taylor Kennedy")
 
 (defparameter *third-floor-solved* NIL)
+(defparameter *second-floor-first* NIL)
+(defparameter *second-floor-second* NIL)
+(defparameter *second-floor-third* NIL)
+
 
 ;;variables for description of in-game locations
 (defparameter *nodes* '((third-floor (you are on the third floor. you see a locked emergency exit door.))
+(second-floor (you are on the second floor. you see a long hallway and a emergency exit door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. you can "talk" to him. there is a book to your left that reads "african or european" which swallow is faster.))
                         (break-room (you are in the break-room. it is empty.))
                         (street-level (you make your way down the emergency stairs. you made it out of the office building.))))
 
@@ -79,6 +84,18 @@
      (t
        '(you cannot do that.))))
 
+;;unlock function. takes a door and unlocks it.
+(defun unlock-second ()
+  (cond
+    ;unlock only on second-floor
+    ((AND (eq *location* 'second-floor) (eq *second-floor-third* NIL))
+     (door-puzzle))
+    ((AND (eq *location* 'second-floor) (eq *second-floor-third* t))
+      '(emergency door already unlocked.))
+     (t
+       '(you cannot do that.))))
+
+
 ;;door-puzzle
 (defun door-puzzle ()
   (format t "Unlocking door...")
@@ -90,6 +107,15 @@
   (setf *third-floor-solved* t)
   (rplaca (cdr (assoc 'third-floor *nodes*)) '(you are on the third-floor. the emergency door has been unlocked.))
   (look))
+
+
+(defun talk ()
+(princ "The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+(fresh-line)
+(princ "What is the (cdr (cdr (cdr list))) represented as.")
+(let ((cmd (game-read)))
+ (if(eq (car cmd) 'cdr)(princ "yay"))))
+
 
 ;  wizards_game part 2
 
@@ -150,7 +176,7 @@
              (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
 ;;variable of allowed commands
-(defparameter *allowed-commands* '(look walk unlock))
+(defparameter *allowed-commands* '(look walk unlock talk))
 
 ;;game-eval allows only certain commands to go through
 (defun game-eval (sexp)
