@@ -130,7 +130,7 @@
 
 ;;sets code for door
 (defun set-code ()
-  (setq number (+ 1 (random 24)))
+  (let ((number (+ 1 (random 24))))
   (cond
     ((= number 1)
       (setq *e-door-code* 2379))
@@ -179,7 +179,7 @@
     ((= number 23)
       (setq *e-door-code* 9273))
     ((= number 24)
-      (setq *e-door-code* 9237))))
+      (setq *e-door-code* 9237)))))
 
 ;;prints out door manual
 (defun e-door-manual ()
