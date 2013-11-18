@@ -1,7 +1,7 @@
 ;;; -*- Mode: LISP; Syntax: Common-lisp; Package: USER; Base: 10 -*-
-;;; Name:Alvin Wang, Brent Yoshida, Taylor Kennedy   Date: 10/23/13
-;;; Course: ICS313        Assignment: 5 
-;;; File: alvinw5.lisp
+;;; Name:Alvin Wang, Brent Yoshida, Taylor Kennedy   Date: 11/15/13
+;;; Course: ICS313        Assignment: 6
+;;; File: alvinw-myfloor.lisp
 
 
 ;;global constant containing name
