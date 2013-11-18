@@ -12,10 +12,16 @@
 (defparameter *current-guess* 0000)
 (defparameter *attempts* 0)
 
+(defparameter *run-turns* 0)
+(defparameter *faults* 0)
+(defparameter *start-time* NIL)
+(defparameter *end-time* NIL)
+
 ;;variables for description of in-game locations
 (defparameter *nodes* '((third-floor (you are on the third floor. you see a locked emergency exit door.))
                         (break-room (you are in the break-room. it is empty.))
-                        (street-level (you make your way down the emergency stairs. you made it out of the office building.))))
+                        (street-level (you make your way down the emergency stairs. you made it out of the office building. better make a run for it.))
+                        (jungle (you have made it back home to the jungle!))))
 
 ;;describes location
 (defun describe-location (location nodes)
@@ -23,8 +29,7 @@
 
 ;;variables to show connections between locations
 (defparameter *edges* '((third-floor (break-room west door))
-                        (break-room  (third-floor east door))
-                        (street-level (third-floor up ladder))))
+                        (break-room  (third-floor east door))))
 
 ;;desribes connecting edges
 (defun describe-path (edge)
@@ -73,6 +78,7 @@
 
 ;;unlock function. takes a door and unlocks it.
 (defun unlock ()
+  (terpri)
   (cond
     ;unlock only on third-floor
     ((AND (eq *location* 'third-floor) (eq *third-floor-solved* NIL))
@@ -88,6 +94,7 @@
       (e-door-manual)
       (set-code)
       (door-puzzle))
+    ;checks if third floor is already solved
     ((AND (eq *location* 'third-floor) (eq *third-floor-solved* t))
       '(emergency door already unlocked.))
     (t
@@ -97,16 +104,24 @@
 (defun door-puzzle ()
   (cond
     ((AND (< *attempts* 16) (eq *e-door-code* *current-guess*))
-      (princ "Door unlocked!")
+      (terpri)
+      (princ "SUCCESS: DOOR UNLOCKED!")
+      (terpri)
       (terpri)
       (push '(street-level north door) (cdr (assoc *location* *edges*)))
       (setf *third-floor-solved* t)
       (rplaca (cdr (assoc 'third-floor *nodes*)) '(you are on the third-floor. the emergency door has been unlocked.))
+      (push 'run *allowed-commands*)
+      (sleep 1)
       (look))
     ((AND (> *attempts* 15) (NOT (eq *e-door-code* *current-guess*)))
-     (princ "Max attempts reached!")
      (terpri)
+     (princ "FAIL: MAX ATTEMPTS REACHED!")
+     (terpri)
+     (sleep 1)
      (princ "Resetting System.")
+     (terpri)
+     (sleep 1)
      (terpri)
      (setf *attempts* 0)
      (setf *current-guess* 0000)
@@ -116,15 +131,17 @@
 
 ;;entering code for door
 (defun enter-code ()
-  (format t "Enter Code: ")
+  (terpri)
+  (princ "Enter Code: ")
   (let ((guess (read)))
     (setq *current-guess* guess)
     (cond
       ((eq *e-door-code* guess)
         (door-puzzle))
       (t
-        (format t "Inavlid Code. Try again.")
-        (fresh-line)
+        (princ "Inavlid Code. Try again.")
+        (terpri)
+        (display-stats)
         (setq *attempts* (+ *attempts* 1))
         (door-puzzle)))))
 
@@ -183,7 +200,7 @@
 
 ;;prints out door manual
 (defun e-door-manual ()
-  (fresh-line)
+  (terpri)
   (princ " _____________________________________________________________________ ")(terpri)
   (princ "|                                                                     |")(terpri)
   (princ "|                   ACME CORPORATION - EMERGENCY DOOR                 |")(terpri)
@@ -228,14 +245,141 @@
   (princ "|                                                                     |")(terpri)
   (princ "|_____________________________________________________________________|")(terpri))
 
-;  wizards_game part 2
+;;run function. starts run to airport.
+(defun run ()
+  (cond
+    ((AND (eq *location* 'street-level) (eq *run-turns* 0))
+      (terpri)
+      (princ "You've made it out of the office.")
+      (terpri)
+      (sleep 2)
+      (princ "Now it's time to make your way back home to the jungle.")
+      (terpri)
+      (sleep 2)
+      (run-game-instructions)
+      (run-game))
+    (t
+      '(you can't do that.))))
 
-;;used to start game and initialize a custom REPL
-;(defun game-repl ()
-    ;(let ((cmd (game-read)))
-        ;(unless (eq (car cmd) 'quit)
-            ;(game-print (game-eval cmd))
-            ;(game-repl))))
+;;run-game loop
+(defun run-game ()
+  (cond
+    ((AND (= *run-turns* 10) (< *faults* 3))
+     (end-game))
+    ((= *faults* 3)
+     (princ "MISSION FAILED!")
+     (terpri)
+     (sleep 1)
+     (princ "YOU SOMEHOW ENDED UP BACK WHERE YOU STARTED.")
+     (terpri)
+     (sleep 1)
+     (princ "RESTARTING")
+     (terpri)
+     (fresh-line)
+     (setf *run-turns* 0)
+     (setf *faults* 0)
+     (look))
+    (t
+     (run-direction)
+     (run-game))))
+
+;;Picks a direction for the quick time event(qte).
+(defun run-direction ()
+  (let ((direction (+ 1 (random 4))))
+    (cond
+      ((= direction 1)
+       (qte "= Go NORTH =" 'north "Success!" "Fail. Incorrect input."))
+      ((= direction 2)
+       (qte "= Go EAST =" 'east "Success!" "Fail. Incorrect input."))
+      ((= direction 1)
+       (qte "= Go SOUTH =" 'south "Success!" "Fail. Incorrect input."))
+      ((= direction 1)
+       (qte "= Go WEST =" 'west "Success!" "Fail. Incorrect input."))
+      (t
+        'north))))
+
+;;quick time event
+(defun qte (direction-text success-input success-message fail)
+  (princ direction-text)
+  (terpri)
+  (setq *start-time* (get-internal-real-time))
+  (princ "Enter direction: ")
+  (let ((user-input (read)))
+    (setq *end-time* (- (get-internal-real-time) *start-time*))
+    (cond
+      ((AND (eq success-input user-input) (<= *end-time* 3500))
+       (princ success-message)
+       (setq *run-turns* (+ *run-turns* 1))
+       (display-stats))
+      ((AND (eq success-input user-input) (>= *end-time* 3500))
+       (princ "Fail. You were too slow.")
+       (setq *faults* (+ *faults* 1))
+       (display-stats))
+      (t
+       (princ fail)
+       (setq *faults* (+ *faults* 1))
+       (display-stats)))))
+
+;;shows current amount of run-turns and faults.
+(defun display-stats ()
+  (cond
+    ((eq *location* 'street-level)
+     (format t "~%Total Turns: ~A~%Total Faults: ~A~%~%" *run-turns* *faults*))
+    ((eq *location* 'third-floor)
+     (format t "~%Total Attenptss: ~A~%" *attempts*))))
+      
+
+;;instructions for run-game
+(defun run-game-instructions ()
+  (princ "==============================")
+  (terpri)
+  (princ "INSTRUCTIONS FOR RUN MINI-GAME")
+  (terpri)
+  (princ "==============================")
+  (terpri)
+  (sleep 3)
+  (princ "USE YOUR ANIMAL INSTINCTS TO NAVIGATE YOUR WAY TO THE NEAREST CARGO PLANE.")
+  (terpri)
+  (sleep 3)
+  (princ "A DIRECTION WILL BE GENERATED AND YOU WILL HAVE 3 SECONDS TO TYPE IN THAT DIRECTION.")
+  (terpri)
+  (princ "DIRECTIONS: WEST  EAST  NORTH  SOUTH")
+  (terpri)
+  (sleep 3)
+  (princ "YOU MUST CORRECTLY ENTER THE DIRECTION 10 TIMES TO SUCCEED.")
+  (terpri)
+  (sleep 3)
+  (princ "HOWEVER IF YOU FAIL TO ENTER THE CORRECT DIRECTION 3 TIMES. YOU WILL SENT BACK TO THE BEGINNING.")
+  (terpri)
+  (sleep 2)
+  (princ "READY?")
+  (terpri)
+  (sleep 1)
+  (princ "3...")
+  (terpri)
+  (sleep 1)
+  (princ "2..")
+  (terpri)
+  (sleep 1)
+  (princ "1.")
+  (terpri)
+  (sleep 1)
+  (princ "GO!")
+  (terpri)
+  (sleep 1))
+
+;;ending
+(defun end-game ()
+  (setq *location* 'jungle)
+  (terpri)
+  (princ "== CONGRATULATIONS!  ==")
+  (terpri)
+  (sleep 2)
+  (princ "YOU HAVE MADE IT SAFELY INTO A CARGO PLANE HEADING STRAIGHT TO YOUR HOME!")
+  (terpri)
+  (sleep 2)
+  (terpri)
+  (princ "GAME OVER! Type 'quit' to exit."))
 
 (defun game-repl ()
     (let ((cmd (game-read)))
