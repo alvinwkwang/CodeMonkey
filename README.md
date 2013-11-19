@@ -1,18 +1,17 @@
-CodeMonkey
+Overview
 ==========
-
-ICS313 - Game Project
+A puzzle game in lisp about a young primate trying to escape the boring life of a code monkey and return to the wild.
 
 Installation
 ============
+```
+git clone https://github.com/alvinwkwang/CodeMonkey.git  
+cd CodeMonkey  
 
-`git clone https://github.com/alvinwkwang/CodeMonkey.git  
-`cd CodeMonkey  
-
-
-`clisp  
-`(load "CodeMonkey.lisp")  
-`(game-repl)  
+clisp  
+(load "CodeMonkey.lisp")  
+(game-repl)  
+```
 Play the Game!
 
 Commands
@@ -26,7 +25,10 @@ Commands
 
 Floor-1 Commands
 ================
-
 **blend bananas blender** - blends bananas into a smoothie  
 **give smoothie gorilla** - give a smoothie to the gorilla  
 **unlock key door** - unlock the door to the next level  
+
+Credits
+========
+ICS313
