@@ -18,11 +18,13 @@ Copyright (c) Sam Steingold, Bruno Haible 2001-2010
 
 Type :h and hit Enter for context help.
 
-[1]> (load "CodeMonkey.lisp")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[1]> (load "CodeMonkey.lisp")
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
 ;; Loading file CodeMonkey.lisp ...
 ;; Loaded file CodeMonkey.lisp
 T
-[2]> (game-reple[K)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[2]> (game-reple[K)
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
 look
 You are in an office. A gorilla is sitting at the office desk. The door to the
  next floor is locked. There is a hallway going right from here.
@@ -70,7 +72,8 @@ The door is unlocked. You make your way down to the next floor
 look
 You are in an office. A gorilla is sitting at the office desk. The door to the
  next floor is locked. There is a hallway going right from here.
-quit[K[K[K[Khelp
+quit[K[K[K
+[Khelp
 Help and Hints!
 
 General commands:
