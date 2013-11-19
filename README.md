@@ -29,6 +29,15 @@ Floor-1 Commands
 **give smoothie gorilla** - give a smoothie to the gorilla  
 **unlock key door** - unlock the door to the next level  
 
+Floor-2 Commands
+================
+
+Floor-3 Commands
+================
+
+Street Commands
+===============
+
 Credits
 ========
 ICS313
