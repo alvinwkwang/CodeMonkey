@@ -195,21 +195,9 @@
      (princ "decipher - decipher code to unlock emergency door.")
      (terpri))
     ((eq *Second-Floor* t)
-<<<<<<< HEAD
      (princ "Special Commands: ")
      (terpri)
      (princ "talk - talk to the old monkey.")
-=======
-<<<<<<< HEAD
-     (princ "Special Commands: ")
-     (terpri)
-     (princ "talk - talk with the old monkey.")
-=======
-     (princ "Second Floor Special commands:")
-     (terpri)
-     (princ "talk - thats all you need to know")
->>>>>>> e6b71b20cf967ec5e95368bfe5b98e60582f342a
->>>>>>> 335324acdf61f0e84bf147b4dba7f302d2982916
      (terpri))
     ((eq *First-Floor* t)
      (princ "First Floor Special commands:")
@@ -381,10 +369,7 @@
                  (look)
                  (setf *Second-Floor* 't)
                  (setf *location* 'second-floor)
-<<<<<<< HEAD
                  (look)
-=======
->>>>>>> 335324acdf61f0e84bf147b4dba7f302d2982916
                  '(The door is unlocked. You make your way down to the next floor)
                  )))
 		   
@@ -404,47 +389,28 @@
      (fresh-line)
      (princ "What is the (cdr (cdr (cdr list))) represented as. ")
      (let ((cmd (game-read)))
-<<<<<<< HEAD
        (if(eq (car cmd) 'cdddddr)
            (question2)
          (game-over))))
     (t 
      (princ "You can't do that"))))
-=======
        (if(eq (car cmd) 'cdddddr)(question2)
          (game-over))))
     (t (princ "You can't do that"))
     )
   )
->>>>>>> e6b71b20cf967ec5e95368bfe5b98e60582f342a
 
 (defun question2()
   (princ "What is the lisp used by UH unix? ")
   (let ((cmd (game-read)))
-<<<<<<< HEAD
     (cond 
      ((eq (car cmd) 'allegro)
       (question3))
      (t (game-over)) )))
-=======
-    (cond ((eq (car cmd) 'allegro)(question3))
-          (t (game-over))
-          ))
-  )
->>>>>>> e6b71b20cf967ec5e95368bfe5b98e60582f342a
 
 (defun question3()
-<<<<<<< HEAD
-(princ "What is the airspeed velocity of a unladen swallow?")
-(let ((cmd (game-read)))
-(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(setf *Third-Floor* 't)(terpri)(look))
-(t (game-over))
-))
-)
-=======
   (princ "What is the airspeed velocity of a unladen swallow? ")
   (let ((cmd (game-read)))
-<<<<<<< HEAD
     (cond 
      ((eq (car cmd) 'african_or_european)
       (princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")
@@ -454,18 +420,6 @@
       (look))
      (t 
       (game-over)))))
-=======
-    (cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")
-       (setf *location* 'third-floor)
-       (setf *Third-Floor* 't)
-       (terpri)
-       (look))
-          (t (game-over))
-          ))
-  )
->>>>>>> e6b71b20cf967ec5e95368bfe5b98e60582f342a
->>>>>>> 335324acdf61f0e84bf147b4dba7f302d2982916
-
 
 (defun game-over()
   (princ "You fall down a hole and are never seen again")
