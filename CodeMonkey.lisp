@@ -33,9 +33,9 @@
 (defparameter *nodes* '((first-floor (you are in an office.
                             a gorilla is sitting at the office desk.
                             The door to the next floor is locked.))
-(second-floor (you are on the second floor. you see a long hallway and a emergency exit 
-door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. 
-you can "talk" to him. there is a book to your left that reads "african_or_european" which swallow is faster.))
+                        (second-floor (you are on the second floor. you see a long hallway and a emergency exit 
+                                           door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. 
+                                           you can "talk" to him. there is a book to your left that reads "african_or_european" which swallow is faster.))
                         (break-room (you are in the break room.
                             there is a blender and freezer in the corner.))
                         (storage (you are in the storage room.
@@ -195,10 +195,12 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
      (princ "decipher - decipher code to unlock emergency door.")
      (terpri))
     ((eq *Second-Floor* t)
-     (princ "talk thats all you need to know")
+     (princ "Second Floor Special commands:")
+     (terpri)
+     (princ "talk - thats all you need to know")
      (terpri))
     ((eq *First-Floor* t)
-     (princ "Special commands:")
+     (princ "First Floor Special commands:")
      (terpri)
      (princ "blend bananas blender - blends bananas into a smoothie .")
      (terpri)
@@ -362,8 +364,9 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
                '(The door requires a key. The gorilla next to you seems like he knows something.
                      He seems to be muttering something about a banana smoothie.)
                (progn 
-                 (new-path second-floor down elevator storage)
+                 (new-path first-floor down elevator second-floor)
                  (walk 'down)
+                 (look)
                  (setf *Second-Floor* 't)
                  '(The door is unlocked. You make your way down to the next floor)
                  )))
@@ -379,39 +382,43 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
 ; Brent Add your unique functions here
 ; Globals go in the global section at top
 (defun talk ()
-(cond
-((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
-(fresh-line)
-(princ "What is the (cdr (cdr (cdr list))) represented as. ")
-(let ((cmd (game-read)))
- (if(eq (car cmd) 'cdddddr)(question2)
-(game-over))))
-(t (princ "You can't do that"))
-)
-)
+  (cond
+    ((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+     (fresh-line)
+     (princ "What is the (cdr (cdr (cdr list))) represented as. ")
+     (let ((cmd (game-read)))
+       (if(eq (car cmd) 'cdddddr)(question2)
+         (game-over))))
+    (t (princ "You can't do that"))
+    )
+  )
 
 (defun question2()
-(princ "What is the lisp used by UH unix? ")
-(let ((cmd (game-read)))
-(cond ((eq (car cmd) 'allegro)(question3))
-(t (game-over))
-))
-)
+  (princ "What is the lisp used by UH unix? ")
+  (let ((cmd (game-read)))
+    (cond ((eq (car cmd) 'allegro)(question3))
+          (t (game-over))
+          ))
+  )
 
 (defun question3()
-(princ "What is the airspeed velocity of a unladen swallow? ")
-(let ((cmd (game-read)))
-(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
-(t (game-over))
-))
-)
+  (princ "What is the airspeed velocity of a unladen swallow? ")
+  (let ((cmd (game-read)))
+    (cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")
+       (setf *location* 'third-floor)
+       (setf *Third-Floor* 't)
+       (terpri)
+       (look))
+          (t (game-over))
+          ))
+  )
 
 
 (defun game-over()
-(princ "You fall down a hole and are never seen again")
-(sleep 5)
-(quit)
-)
+  (princ "You fall down a hole and are never seen again")
+  (sleep 5)
+  (quit)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; End Brents Functions ;
