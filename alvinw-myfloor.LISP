@@ -15,7 +15,7 @@
 
 ;;variables for description of in-game locations
 (defparameter *nodes* '((third-floor (you are on the third floor. you see a locked emergency exit door.))
-(second-floor (you are on the second floor. you see a long hallway and a emergency exit door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. you can "talk" to him. there is a book to your left that reads "african or european" which swallow is faster.))
+(second-floor (you are on the second floor. you see a long hallway and a emergency exit door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. you can "talk" to him. there is a book to your left that reads "african_or_european" which swallow is faster.))
                         (break-room (you are in the break-room. it is empty.))
                         (street-level (you make your way down the emergency stairs. you made it out of the office building.))))
 
@@ -55,7 +55,7 @@
       (apply #'append (mapcar #'describe-obj (objects-at loc objs obj-loc)))))
 
 ;;variable used to track plater's current position, default location at living room
-(defparameter *location* 'third-floor)
+(defparameter *location* 'second-floor)
 
 ;;look function calls all description functions: location, paths, and objects
 (defun look ()
@@ -110,13 +110,39 @@
 
 
 (defun talk ()
-(princ "The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+(cond
+((equal *location* 'second-floor)(princ "The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
 (fresh-line)
-(princ "What is the (cdr (cdr (cdr list))) represented as.")
+(princ "What is the (cdr (cdr (cdr list))) represented as. ")
 (let ((cmd (game-read)))
- (if(eq (car cmd) 'cdr)(princ "yay"))))
+ (if(eq (car cmd) 'cdddddr)(question2)
+(game-over))))
+(t (princ "You can't do that"))
+)
+)
+
+(defun question2()
+(princ "What is the lisp used by UH unix? ")
+(let ((cmd (game-read)))
+(cond ((eq (car cmd) 'allegro)(question3))
+(t (game-over))
+))
+)
+
+(defun question3()
+(princ "What is the airspeed velocity of a unladen swallow?")
+(let ((cmd (game-read)))
+(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
+(t (game-over))
+))
+)
 
 
+(defun game-over()
+(princ "You fall down a hole and are never seen again")
+(sleep 5)
+(quit)
+)
 ;  wizards_game part 2
 
 ;;used to start game and initialize a custom REPL
