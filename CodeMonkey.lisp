@@ -17,11 +17,17 @@
 (defparameter *Street-Level* nil)
 (defparameter *Jungle* nil)
 
+
+;;global constants for second-floor door puzzle
+(defparameter *attempts2* 1)
+(defparameter *talked2* nil)
+
 ;;global constants for third-floor door puzzle
 (defparameter *third-floor-solved* NIL)
 (defparameter *e-door-code* 9999)
 (defparameter *current-guess* 0000)
 (defparameter *attempts* 1)
+
  
 ;global constants for street-level run-game
 (defparameter *run-turns* 0)
@@ -383,12 +389,15 @@
 
 ; Brent Add your unique functions here
 ; Globals go in the global section at top
+;; talk function checks to see if on second floor. if not does not work.
 (defun talk ()
   (cond
-    ((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+    ((equal *location* 'second-floor)(if (equal *talked2* nil)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+)
      (fresh-line)
-     (princ "What is the (cdr (cdr (cdr list))) represented as. ")
+     (princ "What is the (cdr (cdr (cdr list))) represented as in a single form 6 tries for all is all you have. ")
      (let ((cmd (game-read)))
+<<<<<<< HEAD
        (if(eq (car cmd) 'cdddddr)
            (question2)
          (game-over))))
@@ -399,10 +408,20 @@
     (t (princ "You can't do that"))
     )
   )
+=======
+    (cond ((eq (car cmd) 'cdddddr)(question2))
+          ((equal 6 *attempts2*) (game-over));; checks to see if exceeded guess limit.
+          (t (setq *attempts2* (+ *attempts2* 1))(setf *talked2* 't)(talk));; if not over guess limit resets.
+
+          ))
+  )))
+
+>>>>>>> Re edited
 
 (defun question2()
   (princ "What is the lisp used by UH unix? ")
   (let ((cmd (game-read)))
+<<<<<<< HEAD
     (cond 
      ((eq (car cmd) 'allegro)
       (question3))
@@ -421,6 +440,29 @@
      (t 
       (game-over)))))
 
+=======
+    (cond ((eq (car cmd) 'allegro)(question3))
+          ((equal 6 *attempts2*) (game-over));; checks to see if exceeded guess limit.
+          (t (setq *attempts2* (+ *attempts2* 1))(question2));; if not over guess limit resets.
+
+          ))
+  )
+;; third question
+(defun question3()
+  (princ "What is the airspeed velocity of a unladen swallow? ")
+  (let ((cmd (game-read)))
+    (cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")
+       (setf *location* 'third-floor)
+       (setf *Third-Floor* 't)
+       (terpri)
+       (look))
+((equal 6 *attempts2*) (game-over)) ;; checks to see if exceeded guess limit.
+(t (setq *attempts2* (+ *attempts2* 1))(question3));; if not over guess limit resets.
+          ))
+  )
+
+;; game over you missed 6 times you fail and exit lisp
+>>>>>>> Re edited
 (defun game-over()
   (princ "You fall down a hole and are never seen again")
   (sleep 5)
