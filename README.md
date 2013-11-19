@@ -1,7 +1,7 @@
 Overview
 ==========
-A puzzle game in lisp about a young primate trying to escape the boring life of a code monkey and return to the wild.
-
+A puzzle game in lisp about a young primate trying to escape the boring life of a code monkey and return to the wild.  
+View the flyer [here](https://raw.github.com/alvinwkwang/CodeMonkey/master/images/CodeMonkey.png).
 Installation
 ============
 ```
