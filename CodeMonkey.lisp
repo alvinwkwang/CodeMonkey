@@ -12,12 +12,12 @@
 
 ;;global constants to check what floors you are currently on
 (defparameter *First-Floor* t)
-(defparameter *Second-Floor* NIL)
-(defparameter *Third-Floor* NIL)
-(defparameter *Street-Level* NIL)
+(defparameter *Second-Floor* nil)
+(defparameter *Third-Floor* nil)
+(defparameter *Street-Level* nil)
 
 ;;variables for description of in-game locations
-(defparameter *nodes* '((office (you are in an office.
+(defparameter *nodes* '((first-floor (you are in an office.
                             a gorilla is sitting at the office desk.
                             The door to the next floor is locked.))
                         (break-room (you are in the break room.
@@ -27,8 +27,8 @@
                         ))
 
 ;;variables to show connections between locations
-(defparameter *edges* '((office (break-room right hallway))
-                        (break-room (office left hallway)
+(defparameter *edges* '((first-floor (break-room right hallway))
+                        (break-room (first-floor left hallway)
                                     (storage right door))
                         (storage (break-room left door))
                         ))
@@ -40,7 +40,7 @@
 (defparameter *object-locations* '((bananas storage)))
 
 ;;variable used to track plater's current position, default location at living room
-(defparameter *location* 'office)
+(defparameter *location* 'first-floor)
 
 ;;variable of allowed commands
 (defparameter *allowed-commands* '(look walk pickup inventory))
@@ -313,7 +313,7 @@
                '(you do not have any bananas.)))
 
 ;;gives the smoothie to the gorilla
-(game-action give smoothie gorilla office
+(game-action give smoothie gorilla first-floor
              (cond                    
                ((and (not (have 'smoothie)) (have 'bananas)) 
                     '(the gorilla likes banana smoothies not bananas 
@@ -327,15 +327,16 @@
                     '(You recieved the key!)))))
 
 ;;unlocks the door to the next level
-(game-action unlock key door office
+(game-action unlock key door first-floor
              (if (not (have 'key))
                '(The door requires a key. The gorilla next to you seems like he knows something.
                      He seems to be muttering something about a banana smoothie.)
-               (progn (new-path office down elevator storage)
-                      (princ "The door is unlocked. You make your way down to the next floor")
-                      (walk 'down)
-                      (setq *Second-Floor* t))
-               ))
+               (progn 
+                 (new-path second-floor down elevator storage)
+                 (walk 'down)
+                 (setf *Second-Floor* 't)
+                 '(The door is unlocked. You make your way down to the next floor)
+                 )))
 		   
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; End Taylors Functions ;
