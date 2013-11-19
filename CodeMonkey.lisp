@@ -14,6 +14,7 @@
 (defparameter *First-Floor* t)
 (defparameter *Second-Floor* NIL)
 (defparameter *Third-Floor* NIL)
+(defparameter *Street-Level* NIL)
 
 ;;variables for description of in-game locations
 (defparameter *nodes* '((office (you are in an office.
@@ -339,3 +340,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ; End Taylors Functions ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;
+; Brents Functions ;
+;;;;;;;;;;;;;;;;;;;;
+
+; Brent Add your unique functions here
+; Globals go in the global section at top
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+; End Brents Functions ;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;
+; Alvins Functions ;
+;;;;;;;;;;;;;;;;;;;;
+
+; Alvin add your unique functions here
+; Globals go in the global section at top
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+; End Alvins Functions ;
+;;;;;;;;;;;;;;;;;;;;;;;;
