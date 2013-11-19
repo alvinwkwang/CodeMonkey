@@ -1,0 +1,28 @@
+CL-USER 62 > (setf *location* 'second-floor)
+SECOND-FLOOR
+
+CL-USER 63 > (talk)
+The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.
+What is the (cdr (cdr (cdr list))) represented as. cdddddr
+What is the lisp used by UH unix? allegro
+What is the airspeed velocity of a unladen swallow?african_or_european
+I don't know that AHHHHH the old man falls through. You hurry to the next floor
+(YOU ARE ON THE THIRD FLOOR. THERE ARE NO ROOMS OF INTEREST. YOU SEE A LOCKED EMERGENCY EXIT DOOR. PERHAPS YOU CAN DECIPHER IT.)
+
+CL-USER 64 > (look)
+(YOU ARE ON THE THIRD FLOOR. THERE ARE NO ROOMS OF INTEREST. YOU SEE A LOCKED EMERGENCY EXIT DOOR. PERHAPS YOU CAN DECIPHER IT.)
+
+CL-USER 65 > (setf *location* 'second-floor)
+SECOND-FLOOR
+
+CL-USER 66 > (look)
+(YOU ARE ON THE SECOND FLOOR. YOU SEE A LONG HALLWAY AND A EMERGENCY EXIT DOOR AT THE END AN OLD MONKEY IS STANDING IN FRONT OF YOU AND A FELLOW MONKEY IS STANDING IN FRONT OF YOU. YOU CAN "talk" TO HIM. THERE IS A BOOK TO YOUR LEFT THAT READS "african_or_european" WHICH SWALLOW IS FASTER.)
+
+CL-USER 67 > (talk)
+The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.
+What is the (cdr (cdr (cdr list))) represented as. cdddr
+You fall down a hole and are never seen again
+What is the lisp used by UH unix? all
+You fall down a hole and are never seen again
+What is the airspeed velocity of a unladen swallow? jjsdk
+You fall down a hole and are never seen again

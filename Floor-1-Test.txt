@@ -1,0 +1,92 @@
+Script started on Mon 18 Nov 2013 07:57:42 PM HST
+]0;taylorak@ramenrulz: ~/Programming/Lisp/CodeMonkey[01;32mtaylorak@ramenrulz[00m:[01;34mCodeMonkey[00m$ clisp
+  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
+  I I I I I I I      8     8   8           8     8     o  8    8
+  I  \ `+' /  I      8         8           8     8        8    8
+   \  `-+-'  /       8         8           8      ooooo   8oooo
+    `-__|__-'        8         8           8           8  8
+        |            8     o   8           8     o     8  8
+  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
+
+Welcome to GNU CLISP 2.49 (2010-07-07) <http://clisp.cons.org/>
+
+Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
+Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
+Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
+Copyright (c) Bruno Haible, Sam Steingold 1999-2000
+Copyright (c) Sam Steingold, Bruno Haible 2001-2010
+
+Type :h and hit Enter for context help.
+
+[1]> (load "CodeMonkey.lisp")[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+;; Loading file CodeMonkey.lisp ...
+;; Loaded file CodeMonkey.lisp
+T
+[2]> (game-reple[K)[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+look
+You are in an office. A gorilla is sitting at the office desk. The door to the
+ next floor is locked. There is a hallway going right from here.
+unlock key o[Kdoor
+The door requires a key. The gorilla next to you seems like he knows
+ something. He seems to be muttering something about a banana smoothie.
+walk right
+You are in the break room. There is a blender and freezer in the corner. There
+ is a hallway going left from here. There is a door going right from here.
+walk right
+You are in the storage room. There is a mountain of bananas in the middle of
+ the room. There is a door going left from here. You see a bananas on the
+ floor.
+pickup bananas
+You are now carrying the bananas
+walk left
+You are in the break room. There is a blender and freezer in the corner. There
+ is a hallway going left from here. There is a door going right from here.
+blend bananas blender
+The instructions on the wall read:
+Use 1C slices of banana for the perfect smoothie
+Enter how many slices of bananas to use (in decimal): 1C
+You made a smoothie!
+walk left
+You are in an office. A gorilla is sitting at the office desk. The door to the
+ next floor is locked. There is a hallway going right from here.
+give gor[K[K[Ksmoothie gorilla
+The gorilla throws the smoothie in your face and howls angrily that you should
+ learn to read instructions.
+walk right
+You are in the break room. There is a blender and freezer in the corner. There
+ is a hallway going left from here. There is a door going right from here.
+blend bananas blender
+The instructions on the wall read:
+Use 1C slices of banana for the perfect smoothie
+Enter how many slices of bananas to use (in decimal): 28
+You made a smoothie!
+walk left
+You are in an office. A gorilla is sitting at the office desk. The door to the
+ next floor is locked. There is a hallway going right from here.
+give gorilla [K[K[K[K[K[K[K[Ksmoothie c[Kgorilla
+You recieved the key!
+unlock key door
+The door is unlocked. You make your way down to the next floor
+look
+You are in an office. A gorilla is sitting at the office desk. The door to the
+ next floor is locked. There is a hallway going right from here.
+quit[K[K[K[Khelp
+Help and Hints!
+
+General commands:
+look - Gives a description of your surroundings.
+walk <direction> - Moves your character to new area of given direction
+pickup <object> - Picks up an object in the area and puts it in your inventory.
+inventory - Shows what is currently objects you are currently carrying
+help/h/? - Opens the help and hints menu.
+quit - Quit game.
+
+talk thats all you need to know
+quit
+NIL
+[3]> (quit)[C[C[C[C[C[C
+Bye.
+]0;taylorak@ramenrulz: ~/Programming/Lisp/CodeMonkey[01;32mtaylorak@ramenrulz[00m:[01;34mCodeMonkey[00m$ exit
+exit
+
+Script done on Mon 18 Nov 2013 08:00:25 PM HST
