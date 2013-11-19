@@ -396,10 +396,12 @@
 )
      (fresh-line)
      (princ "What is the (cdr (cdr (cdr list))) represented as in a single form 6 tries for all is all you have. ")
+(let ((cmd (game-read)))
     (cond ((eq (car cmd) 'cdddddr)(question2))
           ((equal 6 *attempts2*) (game-over));; checks to see if exceeded guess limit.
           (t (setq *attempts2* (+ *attempts2* 1))(setf *talked2* 't)(talk));; if not over guess limit resets.
-          ))
+          )))
+(t (princ "you cannot do that"))
   ))
 
 
