@@ -33,6 +33,9 @@
 (defparameter *nodes* '((first-floor (you are in an office.
                             a gorilla is sitting at the office desk.
                             The door to the next floor is locked.))
+(second-floor (you are on the second floor. you see a long hallway and a emergency exit 
+door at the end an old monkey is standing in front of you and a fellow monkey is standing in front of you. 
+you can "talk" to him. there is a book to your left that reads "african_or_european" which swallow is faster.))
                         (break-room (you are in the break room.
                             there is a blender and freezer in the corner.))
                         (storage (you are in the storage room.
@@ -59,7 +62,7 @@
 (defparameter *location* 'first-floor)
 
 ;;variable of allowed commands
-(defparameter *allowed-commands* '(look walk pickup inventory decipher run))
+(defparameter *allowed-commands* '(look walk pickup inventory decipher run talk))
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; End Global Objects ;
@@ -375,6 +378,40 @@
 
 ; Brent Add your unique functions here
 ; Globals go in the global section at top
+(defun talk ()
+(cond
+((equal *location* 'second-floor)(princ "The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+(fresh-line)
+(princ "What is the (cdr (cdr (cdr list))) represented as. ")
+(let ((cmd (game-read)))
+ (if(eq (car cmd) 'cdddddr)(question2)
+(game-over))))
+(t (princ "You can't do that"))
+)
+)
+
+(defun question2()
+(princ "What is the lisp used by UH unix? ")
+(let ((cmd (game-read)))
+(cond ((eq (car cmd) 'allegro)(question3))
+(t (game-over))
+))
+)
+
+(defun question3()
+(princ "What is the airspeed velocity of a unladen swallow?")
+(let ((cmd (game-read)))
+(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
+(t (game-over))
+))
+)
+
+
+(defun game-over()
+(princ "You fall down a hole and are never seen again")
+(sleep 5)
+(quit)
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; End Brents Functions ;
