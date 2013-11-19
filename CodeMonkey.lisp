@@ -1,7 +1,7 @@
 ;;; -*- Mode: LISP; Syntax: Common-lisp; Package: USER; Base: 10 -*-
 ;;; Name:Alvin Wang, Brent Yoshida, Taylor Kennedy   Date: 10/23/13
 ;;; Course: ICS313        Assignment: 6
-;;; File: taylorak5.lisp
+;;; File: CodeMonkey.lisp
 
 ;;;;;;;;;;;;;;;;;;
 ; Global Objects ;
@@ -180,22 +180,24 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
   (terpri)
   (cond 
     ((eq *Jungle* t)
-     (princ "Jungle Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "quit - Game Over. Nothing left to do.")
      (terpri))
     ((eq *Street-Level* t)
-     (princ "Street Level Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "run - runs to nearest cargo plane.")
      (terpri))
     ((eq *Third-Floor* t)
-     (princ "Third Floor Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "decipher - decipher code to unlock emergency door.")
      (terpri))
     ((eq *Second-Floor* t)
-     (princ "Brents help section")
+     (princ "Special Commands: ")
+     (terpri)
+     (princ "talk - talk to the old monkey.")
      (terpri))
     ((eq *First-Floor* t)
      (princ "Special commands:")
@@ -365,6 +367,8 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
                  (new-path second-floor down elevator storage)
                  (walk 'down)
                  (setf *Second-Floor* 't)
+                 (setf *location* 'second-floor)
+                 (look)
                  '(The door is unlocked. You make your way down to the next floor)
                  )))
 		   
@@ -401,7 +405,7 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
 (defun question3()
 (princ "What is the airspeed velocity of a unladen swallow?")
 (let ((cmd (game-read)))
-(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
+(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(setf *Third-Floor* 't)(terpri)(look))
 (t (game-over))
 ))
 )

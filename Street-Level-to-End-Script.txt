@@ -1,0 +1,153 @@
+You make your way down the emergency stairs. You made it out of the office building. Better make a run for it.
+run
+
+You've made it out of the office.
+Now it's time to make your way back home to the jungle.
+
+==============================
+INSTRUCTIONS FOR RUN MINI-GAME
+==============================
+USE YOUR ANIMAL INSTINCTS TO NAVIGATE YOUR WAY TO THE NEAREST CARGO PLANE.
+A DIRECTION WILL BE GENERATED AND YOU WILL HAVE 3 SECONDS TO TYPE IN THAT DIRECTION.
+DIRECTIONS: WEST  EAST  NORTH  SOUTH
+YOU MUST CORRECTLY ENTER THE DIRECTION 10 TIMES TO SUCCEED.
+HOWEVER IF YOU FAIL TO ENTER THE CORRECT DIRECTION 3 TIMES. YOU WILL SENT BACK TO THE BEGINNING.
+READY?
+3...
+2..
+1.
+GO!
+= Go SOUTH =
+Enter direction: south
+Success!
+Total Turns: 1
+Total Faults: 0
+
+= Go WEST =
+Enter direction: west
+Success!
+Total Turns: 2
+Total Faults: 0
+
+= Go NORTH =
+Enter direction: wrong
+Fail. Incorrect input.
+Total Turns: 2
+Total Faults: 1
+
+= Go WEST =
+Enter direction: tooslow
+Fail. Incorrect input.
+Total Turns: 2
+Total Faults: 2
+
+= Go SOUTH =
+Enter direction: south
+Fail. You were too slow.
+Total Turns: 2
+Total Faults: 3
+
+MISSION FAILED!
+YOU SOMEHOW ENDED UP BACK WHERE YOU STARTED.
+RESTARTING
+You make your way down the emergency stairs. You made it out of the office building. Better make a run for it.
+run
+
+You've made it out of the office.
+Now it's time to make your way back home to the jungle.
+
+==============================
+INSTRUCTIONS FOR RUN MINI-GAME
+==============================
+USE YOUR ANIMAL INSTINCTS TO NAVIGATE YOUR WAY TO THE NEAREST CARGO PLANE.
+A DIRECTION WILL BE GENERATED AND YOU WILL HAVE 3 SECONDS TO TYPE IN THAT DIRECTION.
+DIRECTIONS: WEST  EAST  NORTH  SOUTH
+YOU MUST CORRECTLY ENTER THE DIRECTION 10 TIMES TO SUCCEED.
+HOWEVER IF YOU FAIL TO ENTER THE CORRECT DIRECTION 3 TIMES. YOU WILL SENT BACK TO THE BEGINNING.
+READY?
+3...
+2..
+1.
+GO!
+= Go WEST =
+Enter direction: west
+Success!
+Total Turns: 1
+Total Faults: 0
+
+= Go WEST =
+Enter direction: west
+Success!
+Total Turns: 2
+Total Faults: 0
+
+= Go NORTH =
+Enter direction: north
+Success!
+Total Turns: 3
+Total Faults: 0
+
+= Go EAST =
+Enter direction: east
+Success!
+Total Turns: 4
+Total Faults: 0
+
+= Go NORTH =
+Enter direction: north
+Success!
+Total Turns: 5
+Total Faults: 0
+
+= Go WEST =
+Enter direction: west
+Fail. You were too slow.
+Total Turns: 5
+Total Faults: 1
+
+= Go WEST =
+Enter direction: est
+Fail. Incorrect input.
+Total Turns: 5
+Total Faults: 2
+
+= Go WEST =
+Enter direction: west
+Success!
+Total Turns: 6
+Total Faults: 2
+
+= Go SOUTH =
+Enter direction: south
+Success!
+Total Turns: 7
+Total Faults: 2
+
+= Go SOUTH =
+Enter direction: south
+Success!
+Total Turns: 8
+Total Faults: 2
+
+= Go EAST =
+Enter direction: east
+Success!
+Total Turns: 9
+Total Faults: 2
+
+= Go NORTH =
+Enter direction: north
+Success!
+Total Turns: 10
+Total Faults: 2
+
+
+== CONGRATULATIONS!  ==
+
+YOU HAVE MADE IT SAFELY INTO A CARGO PLANE HEADING STRAIGHT TO YOUR HOME!
+
+You have made it back home to the jungle! Game over. Type -quit- to exit.
+quit
+NIL
+
+CL-USER 5 : 1 > 

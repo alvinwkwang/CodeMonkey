@@ -1,0 +1,176 @@
+You are on the third floor. There are no rooms of interest. You see a locked emergency exit door. Perhaps you can decipher it.
+decipher
+
+It looks like this emergency door was just installed.
+You examine the door closely and notice a small paper on the floor.
+It looks like instructions on how to unlock the door!
+
+ _____________________________________________________________________ 
+|                                                                     |
+|                   ACME CORPORATION - EMERGENCY DOOR                 |
+|                                                                     |
+|           ***WARNING - BASIC KNOWLEDGE OF LISP REQUIRED.***         |
+|                                                                     |
+| *TO UNLOCK:                                                         |
+|   -ENTER A 4 DIGIT CODE IN THE CORRECT SEQUENCE.                    |
+|   -EACH INPUT CAN BE FOUND BY ANSWERING QUESTIONS/RIDDLES.          |
+|   -YOU WILL HAVE 10 TRIES TO GUESS THE CORRECT CODE.                |
+|   -IF YOU ARE UNABLE TO ENTER THE CORRECT CODE. THE SYSTEM WILL     |
+|    RESET, ALONG WITH THE CODE.                                      |
+|                                                                     |
+|  FIRST NUMBER:                                                      |
+|    I AM AN ODD NUMBER; TAKE AWAY A LETTER AND I BECOME EVEN.        |
+|    WHAT NUMBER AM I?                                                |
+|                                                                     |
+|  SECOND NUMBER:                                                     |
+|    A PROGRAMMER GOES TO A STORE. HIS WIFE TOLD HIM, 'GET A GALLON   |
+|    OF MILK, AND IF THEY HAVE EGGS 8.' HOW MANY GALLONS OF MILK DID  |
+|    HE BUY?                                                          |
+|                                                                     |
+|  THIRD NUMBER:                                                      |
+|                                                                     |
+|    (setq a 6) (setq b 5) (setq c 1)                                 |
+|    (defun myster (arg)                                              |
+|      (cond                                                          |
+|       ((numberp arg) (incf c) (* arg arg))                          |
+|       ((stringp arg) (format t ''Happy ~a~%'' arg) arg)             |
+|       ((and (listp arg) arg) (princ (car arg)) (mystery (cdr arg))) |
+|       (t 'completetly)))                                            |
+|    (mystery (+ a b))                                                |
+|                                                                     |
+|    WHAT IS THE VALUE OF C?                                          |
+|                                                                     |
+|  FOURTH NUMBER:                                                     |
+|    (setq even '(0 2 4 6 8))                                         |
+|    (setq odd '(1 3 5 7 9))                                          |
+|    (last(reverse(cddr(cdr(reverse(append(reverse even) odd))))))    |
+|                                                                     |
+|    WHAT DOES THIS RETURN?                                           |
+|                                                                     |
+|_____________________________________________________________________|
+
+Enter Code: 9327
+Inavlid Code. Try again.
+Total Attempts: 1
+
+Enter Code: 2397
+Inavlid Code. Try again.
+Total Attempts: 2
+
+Enter Code: 9732
+Inavlid Code. Try again.
+Total Attempts: 3
+
+Enter Code: 2739
+Inavlid Code. Try again.
+Total Attempts: 4
+
+Enter Code: 2973
+Inavlid Code. Try again.
+Total Attempts: 5
+
+Enter Code: 3279
+Inavlid Code. Try again.
+Total Attempts: 6
+
+Enter Code: 3792
+Inavlid Code. Try again.
+Total Attempts: 7
+
+Enter Code: 3972
+Inavlid Code. Try again.
+Total Attempts: 8
+
+Enter Code: 3297
+Inavlid Code. Try again.
+Total Attempts: 9
+
+Enter Code: 7239
+Inavlid Code. Try again.
+Total Attempts: 10
+
+Enter Code: 7329
+Inavlid Code. Try again.
+Total Attempts: 11
+
+Enter Code: 7923
+Inavlid Code. Try again.
+Total Attempts: 12
+
+Enter Code: 7932
+Inavlid Code. Try again.
+Total Attempts: 13
+
+Enter Code: 2937
+Inavlid Code. Try again.
+Total Attempts: 14
+
+Enter Code: 2973
+Inavlid Code. Try again.
+Total Attempts: 15
+
+FAIL: MAX ATTEMPTS REACHED!
+Resetting System.
+
+You are on the third floor. There are no rooms of interest. You see a locked emergency exit door. Perhaps you can decipher it.
+decipher
+
+It looks like this emergency door was just installed.
+You examine the door closely and notice a small paper on the floor.
+It looks like instructions on how to unlock the door!
+
+ _____________________________________________________________________ 
+|                                                                     |
+|                   ACME CORPORATION - EMERGENCY DOOR                 |
+|                                                                     |
+|           ***WARNING - BASIC KNOWLEDGE OF LISP REQUIRED.***         |
+|                                                                     |
+| *TO UNLOCK:                                                         |
+|   -ENTER A 4 DIGIT CODE IN THE CORRECT SEQUENCE.                    |
+|   -EACH INPUT CAN BE FOUND BY ANSWERING QUESTIONS/RIDDLES.          |
+|   -YOU WILL HAVE 10 TRIES TO GUESS THE CORRECT CODE.                |
+|   -IF YOU ARE UNABLE TO ENTER THE CORRECT CODE. THE SYSTEM WILL     |
+|    RESET, ALONG WITH THE CODE.                                      |
+|                                                                     |
+|  FIRST NUMBER:                                                      |
+|    I AM AN ODD NUMBER; TAKE AWAY A LETTER AND I BECOME EVEN.        |
+|    WHAT NUMBER AM I?                                                |
+|                                                                     |
+|  SECOND NUMBER:                                                     |
+|    A PROGRAMMER GOES TO A STORE. HIS WIFE TOLD HIM, 'GET A GALLON   |
+|    OF MILK, AND IF THEY HAVE EGGS 8.' HOW MANY GALLONS OF MILK DID  |
+|    HE BUY?                                                          |
+|                                                                     |
+|  THIRD NUMBER:                                                      |
+|                                                                     |
+|    (setq a 6) (setq b 5) (setq c 1)                                 |
+|    (defun myster (arg)                                              |
+|      (cond                                                          |
+|       ((numberp arg) (incf c) (* arg arg))                          |
+|       ((stringp arg) (format t ''Happy ~a~%'' arg) arg)             |
+|       ((and (listp arg) arg) (princ (car arg)) (mystery (cdr arg))) |
+|       (t 'completetly)))                                            |
+|    (mystery (+ a b))                                                |
+|                                                                     |
+|    WHAT IS THE VALUE OF C?                                          |
+|                                                                     |
+|  FOURTH NUMBER:                                                     |
+|    (setq even '(0 2 4 6 8))                                         |
+|    (setq odd '(1 3 5 7 9))                                          |
+|    (last(reverse(cddr(cdr(reverse(append(reverse even) odd))))))    |
+|                                                                     |
+|    WHAT DOES THIS RETURN?                                           |
+|                                                                     |
+|_____________________________________________________________________|
+
+Enter Code: 2973
+Inavlid Code. Try again.
+Total Attempts: 1
+
+Enter Code: 2793
+Inavlid Code. Try again.
+Total Attempts: 2
+
+Enter Code: 2379
+
+SUCCESS: DOOR UNLOCKED!
