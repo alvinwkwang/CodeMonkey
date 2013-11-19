@@ -3,6 +3,9 @@
 ;;; Course: ICS313        Assignment: 6
 ;;; File: taylorak5.lisp
 
+;;;;;;;;;;;;;;;;;;
+; Global Objects ;
+;;;;;;;;;;;;;;;;;;
 
 ;;global constant containing name
 (defparameter +ID+ "Alvin Wang, Brent Yoshida, and Taylor Kennedy")
@@ -17,16 +20,36 @@
                             there is a mountain of bananas in the middle of the room.))
                         ))
 
-;;describes location
-(defun describe-location (location nodes)
-   (cadr (assoc location nodes)))
-
 ;;variables to show connections between locations
 (defparameter *edges* '((office (break-room right hallway))
                         (break-room (office left hallway)
                                     (storage right door))
                         (storage (break-room left door))
                         ))
+
+;;list of visible objects
+(defparameter *objects* '(bananas))
+
+;;list of visible objects and where they are located
+(defparameter *object-locations* '((bananas storage)))
+
+;;variable used to track plater's current position, default location at living room
+(defparameter *location* 'office)
+
+;;variable of allowed commands
+(defparameter *allowed-commands* '(look walk pickup inventory))
+
+;;;;;;;;;;;;;;;;;;;;;;
+; End Global Objects ;
+;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;
+; Helper Functions ;
+;;;;;;;;;;;;;;;;;;;;
+
+;;describes location
+(defun describe-location (location nodes)
+   (cadr (assoc location nodes)))
 
 ;;desribes connecting edges
 (defun describe-path (edge)
@@ -35,12 +58,6 @@
 ;;used to describe multiple edges
 (defun describe-paths (location edges)
   (apply #'append (mapcar #'describe-path (cdr (assoc location edges)))))
-
-;;list of visible objects
-(defparameter *objects* '(bananas))
-
-;;list of visible objects and where they are located
-(defparameter *object-locations* '((bananas storage)))
 
 ;;list objects visible from a given location
 (defun objects-at (loc objs obj-loc)
@@ -54,8 +71,17 @@
                 `(you see a ,obj on the floor.)))
       (apply #'append (mapcar #'describe-obj (objects-at loc objs obj-loc)))))
 
-;;variable used to track plater's current position, default location at living room
-(defparameter *location* 'office)
+;;checks if you have an object in your intentory
+(defun have (object) 
+    (member object (cdr (inventory))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+; End Helper Functions ;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;
+; Functions ;
+;;;;;;;;;;;;;
 
 ;;look function calls all description functions: location, paths, and objects
 (defun look ()
@@ -84,8 +110,13 @@
 (defun inventory ()
   (cons 'items- (objects-at 'body *objects* *object-locations*)))
 
-(defun have (object) 
-    (member object (cdr (inventory))))
+;;;;;;;;;;;;;;;;;
+; End Functions ;
+;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;
+; Game Controllers ;
+;;;;;;;;;;;;;;;;;;;;
 
 ;;used to start game and initialize a custom REPL
 (defun game-repl ()
@@ -137,9 +168,6 @@
                     (list 'quote x)))
              (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
-;;variable of allowed commands
-(defparameter *allowed-commands* '(look walk pickup inventory))
-
 ;;game-eval allows only certain commands to go through
 (defun game-eval (sexp)
     (if (member (car sexp) *allowed-commands*)
@@ -163,6 +191,14 @@
     (princ (coerce (tweak-text (coerce (string-trim "() " (prin1-to-string lst)) 'list) t nil) 'string))
     (fresh-line))
 
+;;;;;;;;;;;;;;;;;;;;;;;;
+; End Game Controllers ;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;
+; Macros ;
+;;;;;;;;;;
+
 ;;macro that creates a new game action
 (defmacro game-action (command subj obj place &body body)
   `(progn (defun ,command (subject object)
@@ -175,50 +211,6 @@
             '(i cant ,command like that.)))
           (pushnew ',command *allowed-commands*)))
 
-;; true if input the right amount of bananas into blend action
-(defparameter *good-smoothie* NIL)
-
-;;blends bananas into a smoothie
-(game-action blend bananas blender break-room 
-             (if (and (have 'bananas))
-               (progn 
-                 (princ "The instructions on the wall read:")
-                 (terpri)
-                 (princ "Use 1C slices of banana for the perfect smoothie")
-                 (terpri)
-                 (princ "Enter how many slices of bananas to use (in decimal): ")
-                 (let ((input (read)))
-                   (if (eq input 28)
-                     (setq *good-smoothie* t)))
-                 (new-object smoothie body)
-                 '(You made a smoothie!))
-               '(you do not have any bananas.)))
-
-;;gives the smoothie to the gorilla
-(game-action give smoothie gorilla office
-             (cond                    
-               ((and (not (have 'smoothie)) (have 'bananas)) 
-                    '(the gorilla likes banana smoothies not bananas 
-                          he smashes you through the ceiling.))
-               ((not (have 'smoothie)) '(I could really use a smoothie...))
-               ((and (have 'smoothie) (not *good-smoothie*))
-                '(The gorilla throws the smoothie in your face and howls
-                      angrily that you should learn to read instructions.))
-               (t (progn
-                    (new-object key body)
-                    '(You recieved the key!)))))
-
-;;unlocks the door to the next level
-(game-action unlock key door office
-             (if (not (have 'key))
-               '(The door requires a key. The gorilla next to you seems like he knows something.
-                     He seems to be muttering something about a banana smoothie.)
-               (progn (new-path office down elevator storage)
-                      (princ "The door is unlocked. You make your way down to the next floor")
-                      (walk 'down))
-               ))
-
-		   
 ;;Macro the creates a new location
 (defmacro new-location (location location-description) ; adds new location.
     `(if (and (listp ',location-description)
@@ -274,3 +266,58 @@
           ;;otherwise add edge to location1
 		  (t
            (nconc (assoc ',location1 *edges*) '((,location2 ,direction ,path-type))))))))
+
+;;;;;;;;;;;;;;
+; End Macros ;
+;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;
+; Taylors Functions ;
+;;;;;;;;;;;;;;;;;;;;;
+
+;; true if input the right amount of bananas into blend action
+(defparameter *good-smoothie* NIL)
+
+;;blends bananas into a smoothie
+(game-action blend bananas blender break-room 
+             (if (and (have 'bananas))
+               (progn 
+                 (princ "The instructions on the wall read:")
+                 (terpri)
+                 (princ "Use 1C slices of banana for the perfect smoothie")
+                 (terpri)
+                 (princ "Enter how many slices of bananas to use (in decimal): ")
+                 (let ((input (read)))
+                   (if (eq input 28)
+                     (setq *good-smoothie* t)))
+                 (new-object smoothie body)
+                 '(You made a smoothie!))
+               '(you do not have any bananas.)))
+
+;;gives the smoothie to the gorilla
+(game-action give smoothie gorilla office
+             (cond                    
+               ((and (not (have 'smoothie)) (have 'bananas)) 
+                    '(the gorilla likes banana smoothies not bananas 
+                          he smashes you through the ceiling.))
+               ((not (have 'smoothie)) '(I could really use a smoothie...))
+               ((and (have 'smoothie) (not *good-smoothie*))
+                '(The gorilla throws the smoothie in your face and howls
+                      angrily that you should learn to read instructions.))
+               (t (progn
+                    (new-object key body)
+                    '(You recieved the key!)))))
+
+;;unlocks the door to the next level
+(game-action unlock key door office
+             (if (not (have 'key))
+               '(The door requires a key. The gorilla next to you seems like he knows something.
+                     He seems to be muttering something about a banana smoothie.)
+               (progn (new-path office down elevator storage)
+                      (princ "The door is unlocked. You make your way down to the next floor")
+                      (walk 'down))
+               ))
+		   
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; End Taylors Functions ;
+;;;;;;;;;;;;;;;;;;;;;;;;;
