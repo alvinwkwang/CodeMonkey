@@ -20,8 +20,7 @@
 (defparameter *end-time* NIL)
 
 ;;variables for description of in-game locations
-(defparameter *nodes* '((third-floor (you are on the third floor. you see a locked emergency exit door.))
-                        (break-room (you are in the break-room. it is empty.))
+(defparameter *nodes* '((third-floor (you are on the third floor. there are no rooms of interest. you see a locked emergency exit door.))
                         (street-level (you make your way down the emergency stairs. you made it out of the office building. better make a run for it.))
                         (jungle (you have made it back home to the jungle! Game over. type -quit- to exit.))))
 
@@ -30,8 +29,7 @@
    (cadr (assoc location nodes)))
 
 ;;variables to show connections between locations
-(defparameter *edges* '((third-floor (break-room west door))
-                        (break-room  (third-floor east door))))
+(defparameter *edges* '())
 
 ;;desribes connecting edges
 (defun describe-path (edge)
@@ -110,16 +108,13 @@
       (terpri)
       (princ "SUCCESS: DOOR UNLOCKED!")
       (terpri)
-      (terpri)
-      (push '(street-level north door) (cdr (assoc *location* *edges*)))
+      (terpri)      
       (setf *third-floor-solved* t)
-      (rplaca (cdr (assoc 'third-floor *nodes*)) '(you are on the third-floor. the emergency door has been unlocked.))
-      (pushnew 'run *allowed-commands*)
+      (setf *location* 'street-level)
       (sleep 1)
       (look))
     ;failed attempt. resets door code
     ((AND (> *attempts* 15) (NOT (eq *e-door-code* *current-guess*)))
-     (setf *repeat-third-floor* t)
      (terpri)
      (princ "FAIL: MAX ATTEMPTS REACHED!")
      (terpri)
@@ -451,7 +446,7 @@
              (cons (car cmd) (mapcar #'quote-it (cdr cmd))))))
 
 ;;variable of allowed commands
-(defparameter *allowed-commands* '(look walk unlock))
+(defparameter *allowed-commands* '(look walk unlock run))
 
 ;;game-eval allows only certain commands to go through
 (defun game-eval (sexp)
