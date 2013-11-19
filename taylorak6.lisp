@@ -10,6 +10,11 @@
 ;;global constant containing name
 (defparameter +ID+ "Alvin Wang, Brent Yoshida, and Taylor Kennedy")
 
+;;global constants to check what floors you are currently on
+(defparameter *First-Floor* t)
+(defparameter *Second-Floor* NIL)
+(defparameter *Third-Floor* NIL)
+
 ;;variables for description of in-game locations
 (defparameter *nodes* '((office (you are in an office.
                             a gorilla is sitting at the office desk.
@@ -42,6 +47,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ; End Global Objects ;
 ;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;;;;;;;;;;;;;;;;;;;;
 ; Helper Functions ;
@@ -79,6 +85,7 @@
 ; End Helper Functions ;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+
 ;;;;;;;;;;;;;
 ; Functions ;
 ;;;;;;;;;;;;;
@@ -113,6 +120,7 @@
 ;;;;;;;;;;;;;;;;;
 ; End Functions ;
 ;;;;;;;;;;;;;;;;;
+
 
 ;;;;;;;;;;;;;;;;;;;;
 ; Game Controllers ;
@@ -150,16 +158,23 @@
   (princ "quit - Quit game.")
   (terpri)
   (terpri)
-  (princ "Special commands:")
-  (terpri)
-  (princ "weld <object> <object> - Welds one object to another.")
-  (terpri)
-  (princ "dunk <object> <object> - Dunk an object into another.")
-  (terpri)
-  (princ "splash <object> <object> - Splash an object onto another.")
-  (terpri)
-  (princ "forge <object> <object> <object> <object> - Forge four objects into one.")
-  (terpri))
+  (cond 
+    ((eq *Third-Floor* t)
+     (princ "Alvins help section")
+     (terpri))
+    ((eq *Second-Floor* t)
+     (princ "Brents help section")
+     (terpri))
+    ((eq *First-Floor* t)
+     (princ "Special commands:")
+     (terpri)
+     (princ "blend bananas blender - blends bananas into a smoothie .")
+     (terpri)
+     (princ "give smoothie gorilla - give a smoothie to the gorilla.")
+     (terpri)
+     (princ "unlock key door - unlock the door to the next level.")
+     (terpri))
+    ))
 
 ;;custom read function that concatenates parenthese around commands and a quote infront of parameters
 (defun game-read ()
@@ -194,6 +209,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; End Game Controllers ;
 ;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;;;;;;;;;;
 ; Macros ;
@@ -271,6 +287,7 @@
 ; End Macros ;
 ;;;;;;;;;;;;;;
 
+
 ;;;;;;;;;;;;;;;;;;;;;
 ; Taylors Functions ;
 ;;;;;;;;;;;;;;;;;;;;;
@@ -315,7 +332,8 @@
                      He seems to be muttering something about a banana smoothie.)
                (progn (new-path office down elevator storage)
                       (princ "The door is unlocked. You make your way down to the next floor")
-                      (walk 'down))
+                      (walk 'down)
+                      (setq *Second-Floor* t))
                ))
 		   
 ;;;;;;;;;;;;;;;;;;;;;;;;;
