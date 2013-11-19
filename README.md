@@ -34,10 +34,11 @@ Floor-2 Commands
 
 Floor-3 Commands
 ================
+**decipher** - decipher the emergency door's code.
 
 Street Commands
 ===============
-
+**run** - runs to nearest cargo plane.
 Credits
 ========
 ICS313
