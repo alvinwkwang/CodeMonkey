@@ -195,7 +195,7 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
      (princ "decipher - decipher code to unlock emergency door.")
      (terpri))
     ((eq *Second-Floor* t)
-     (princ "Brents help section")
+     (princ "talk thats all you need to know")
      (terpri))
     ((eq *First-Floor* t)
      (princ "Special commands:")
@@ -380,7 +380,7 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
 ; Globals go in the global section at top
 (defun talk ()
 (cond
-((equal *location* 'second-floor)(princ "The old man speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
 (fresh-line)
 (princ "What is the (cdr (cdr (cdr list))) represented as. ")
 (let ((cmd (game-read)))
@@ -399,9 +399,9 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
 )
 
 (defun question3()
-(princ "What is the airspeed velocity of a unladen swallow?")
+(princ "What is the airspeed velocity of a unladen swallow? ")
 (let ((cmd (game-read)))
-(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old man falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
+(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
 (t (game-over))
 ))
 )
