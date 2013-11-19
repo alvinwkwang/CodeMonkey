@@ -31,6 +31,7 @@ Floor-1 Commands
 
 Floor-2 Commands
 ================
+**talk** - talks to the evil old monkey.
 
 Floor-3 Commands
 ================

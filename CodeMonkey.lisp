@@ -397,7 +397,6 @@
      (fresh-line)
      (princ "What is the (cdr (cdr (cdr list))) represented as in a single form 6 tries for all is all you have. ")
      (let ((cmd (game-read)))
-<<<<<<< HEAD
        (if(eq (car cmd) 'cdddddr)
            (question2)
          (game-over))))
@@ -408,7 +407,6 @@
     (t (princ "You can't do that"))
     )
   )
-=======
     (cond ((eq (car cmd) 'cdddddr)(question2))
           ((equal 6 *attempts2*) (game-over));; checks to see if exceeded guess limit.
           (t (setq *attempts2* (+ *attempts2* 1))(setf *talked2* 't)(talk));; if not over guess limit resets.
@@ -416,12 +414,10 @@
           ))
   )))
 
->>>>>>> Re edited
 
 (defun question2()
   (princ "What is the lisp used by UH unix? ")
   (let ((cmd (game-read)))
-<<<<<<< HEAD
     (cond 
      ((eq (car cmd) 'allegro)
       (question3))
@@ -439,8 +435,6 @@
       (look))
      (t 
       (game-over)))))
-
-=======
     (cond ((eq (car cmd) 'allegro)(question3))
           ((equal 6 *attempts2*) (game-over));; checks to see if exceeded guess limit.
           (t (setq *attempts2* (+ *attempts2* 1))(question2));; if not over guess limit resets.
@@ -460,9 +454,7 @@
 (t (setq *attempts2* (+ *attempts2* 1))(question3));; if not over guess limit resets.
           ))
   )
-
 ;; game over you missed 6 times you fail and exit lisp
->>>>>>> Re edited
 (defun game-over()
   (princ "You fall down a hole and are never seen again")
   (sleep 5)
