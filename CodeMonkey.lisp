@@ -688,15 +688,15 @@
   (let ((user-input (read)))
     ;set time it took for user to enter input
     (setq *end-time* (- (get-internal-real-time) *start-time*))
-    ;checks whether the user input was correct and within time(< 2 seconds)
+    ;checks whether the user input was correct and within time(around 3 seconds)
     (cond
       ;correct input and within time
-      ((AND (eq success-input user-input) (<= *end-time* 2000))
+      ((AND (eq success-input user-input) (<= *end-time* 3000))
        (princ success-message)
        (setq *run-turns* (+ *run-turns* 1))
        (display-stats))
       ;correct input and over time
-      ((AND (eq success-input user-input) (>= *end-time* 2000))
+      ((AND (eq success-input user-input) (>= *end-time* 3000))
        (princ "Fail. You were too slow.")
        (setq *faults* (+ *faults* 1))
        (display-stats))
