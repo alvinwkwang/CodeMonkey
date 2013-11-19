@@ -1,7 +1,7 @@
 ;;; -*- Mode: LISP; Syntax: Common-lisp; Package: USER; Base: 10 -*-
 ;;; Name:Alvin Wang, Brent Yoshida, Taylor Kennedy   Date: 10/23/13
 ;;; Course: ICS313        Assignment: 6
-;;; File: taylorak5.lisp
+;;; File: CodeMonkey.lisp
 
 ;;;;;;;;;;;;;;;;;;
 ; Global Objects ;
@@ -180,22 +180,24 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
   (terpri)
   (cond 
     ((eq *Jungle* t)
-     (princ "Jungle Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "quit - Game Over. Nothing left to do.")
      (terpri))
     ((eq *Street-Level* t)
-     (princ "Street Level Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "run - runs to nearest cargo plane.")
      (terpri))
     ((eq *Third-Floor* t)
-     (princ "Third Floor Special Commands: ")
+     (princ "Special Commands: ")
      (terpri)
      (princ "decipher - decipher code to unlock emergency door.")
      (terpri))
     ((eq *Second-Floor* t)
-     (princ "talk thats all you need to know")
+     (princ "Special Commands: ")
+     (terpri)
+     (princ "talk - talk with the old monkey.")
      (terpri))
     ((eq *First-Floor* t)
      (princ "Special commands:")
@@ -365,6 +367,7 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
                  (new-path second-floor down elevator storage)
                  (walk 'down)
                  (setf *Second-Floor* 't)
+                 (setf *location* 'second-floor)
                  '(The door is unlocked. You make your way down to the next floor)
                  )))
 		   
@@ -379,32 +382,37 @@ you can "talk" to him. there is a book to your left that reads "african_or_europ
 ; Brent Add your unique functions here
 ; Globals go in the global section at top
 (defun talk ()
-(cond
-((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
-(fresh-line)
-(princ "What is the (cdr (cdr (cdr list))) represented as. ")
-(let ((cmd (game-read)))
- (if(eq (car cmd) 'cdddddr)(question2)
-(game-over))))
-(t (princ "You can't do that"))
-)
-)
+  (cond
+    ((equal *location* 'second-floor)(princ "The old monkey speaks to the other monkey To pass this way you must answer my questions 3 What is your name? The monkey answers Sir Monkihad. What is your quest. What is your favorite color? Blue no Gre... AHHHHH as the monkey falls through the floor.")
+     (fresh-line)
+     (princ "What is the (cdr (cdr (cdr list))) represented as. ")
+     (let ((cmd (game-read)))
+       (if(eq (car cmd) 'cdddddr)
+           (question2)
+         (game-over))))
+    (t 
+     (princ "You can't do that"))))
 
 (defun question2()
-(princ "What is the lisp used by UH unix? ")
-(let ((cmd (game-read)))
-(cond ((eq (car cmd) 'allegro)(question3))
-(t (game-over))
-))
-)
+  (princ "What is the lisp used by UH unix? ")
+  (let ((cmd (game-read)))
+    (cond 
+     ((eq (car cmd) 'allegro)
+      (question3))
+     (t (game-over)) )))
 
 (defun question3()
-(princ "What is the airspeed velocity of a unladen swallow? ")
-(let ((cmd (game-read)))
-(cond ((eq (car cmd) 'african_or_european)(princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")(setf *location* 'third-floor)(terpri)(look))
-(t (game-over))
-))
-)
+  (princ "What is the airspeed velocity of a unladen swallow? ")
+  (let ((cmd (game-read)))
+    (cond 
+     ((eq (car cmd) 'african_or_european)
+      (princ "I don't know that AHHHHH the old monkey falls through. You hurry to the next floor")
+      (setf *location* 'third-floor)
+      (setf *Third-Floor* t)
+      (terpri)
+      (look))
+     (t 
+      (game-over)))))
 
 
 (defun game-over()
